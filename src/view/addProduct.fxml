@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProduct">
+   <children>
+      <SplitPane dividerPositions="0.4" prefHeight="850.0" prefWidth="1300.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <GridPane layoutX="1.0" layoutY="90.0" prefHeight="425.0" prefWidth="515.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <Label text="ID">
+                                 <font>
+                                    <Font name="JetBrains Mono Regular" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children></StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <TextField fx:id="productIDField" disable="true" editable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" text="Auto Gen - Disabled">
+                                 <StackPane.margin>
+                                    <Insets right="50.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children></StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Name">
+                                 <font>
+                                    <Font name="JetBrains Mono Regular" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children></StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <TextField fx:id="productNameField" prefHeight="30.0">
+                                 <StackPane.margin>
+                                    <Insets right="50.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children></StackPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Max:">
+                                       <font>
+                                          <Font name="JetBrains Mono Regular" size="21.0" />
+                                       </font></Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="productMaxField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0">
+                                       <StackPane.margin>
+                                          <Insets right="50.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children></StackPane>
+                           </children></HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Min:">
+                                       <font>
+                                          <Font name="JetBrains Mono Regular" size="21.0" />
+                                       </font></Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="productMinField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0">
+                                       <StackPane.margin>
+                                          <Insets right="50.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children></StackPane>
+                           </children></HBox>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <children>
+                              <Label text="Inventory">
+                                 <font>
+                                    <Font name="JetBrains Mono Regular" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children></StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <TextField fx:id="productInventoryField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0">
+                                 <StackPane.margin>
+                                    <Insets right="50.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children></StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
+                           <children>
+                              <Label text="Price">
+                                 <font>
+                                    <Font name="JetBrains Mono Regular" size="21.0" />
+                                 </font></Label>
+                           </children></StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <TextField fx:id="productPriceField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0">
+                                 <StackPane.margin>
+                                    <Insets right="50.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children></StackPane>
+                     </children>
+                  </GridPane>
+                  <StackPane layoutX="1.0" layoutY="-10.0" prefHeight="100.0" prefWidth="515.0">
+                     <children>
+                        <Label text="Add Product">
+                           <font>
+                              <Font name="JetBrains Mono ExtraBold Italic" size="28.0" />
+                           </font></Label>
+                     </children>
+                  </StackPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox layoutY="-1.0" prefHeight="925.0" prefWidth="775.0">
+                     <children>
+                        <StackPane prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="searchPartField" maxHeight="-Infinity" minHeight="-Infinity" onAction="#searchPart" prefHeight="30.0" promptText="Search by PartID or Name">
+                                 <StackPane.margin>
+                                    <Insets left="375.0" right="75.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="allPartsTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="350.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn fx:id="partID" prefWidth="75.0" text="Part ID" />
+                                  <TableColumn fx:id="partName" prefWidth="250.0" text="Part Name" />
+                                    <TableColumn fx:id="partStock" prefWidth="150.0" text="Inventory Level" />
+                                    <TableColumn fx:id="partPrice" prefWidth="100.0" text="Price" />
+                                </columns>
+                                 <StackPane.margin>
+                                    <Insets left="100.0" right="100.0" />
+                                 </StackPane.margin>
+                              </TableView>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="50.0" prefWidth="775.0">
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="775.0">
+                                 <children>
+                                    <StackPane prefHeight="50.0" prefWidth="475.0" />
+                                    <StackPane prefHeight="150.0" prefWidth="300.0">
+                                       <children>
+                                          <Button fx:id="addAssociatedPartBtn" mnemonicParsing="false" onAction="#addAssociatedPart" text="Add Associated Part" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets right="50.0" />
+                                       </padding>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="associatedPartsTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="350.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn fx:id="associatedPartID" prefWidth="75.0" text="Part ID" />
+                                  <TableColumn fx:id="associatedPartName" prefWidth="250.0" text="Part Name" />
+                                    <TableColumn fx:id="associatedPartStock" prefWidth="150.0" text="Inventory Level" />
+                                    <TableColumn fx:id="associatedPartPrice" prefWidth="100.0" text="Price" />
+                                </columns>
+                                 <StackPane.margin>
+                                    <Insets left="100.0" right="100.0" />
+                                 </StackPane.margin>
+                              </TableView>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane prefHeight="50.0" prefWidth="475.0" />
+                                    <StackPane prefHeight="50.0" prefWidth="300.0">
+                                       <children>
+                                          <Button fx:id="removeAssociatedPartBtn" mnemonicParsing="false" onAction="#removeAssociatedPart" text="Remove Associated Part" />
+                                       </children>
+                                       <padding>
+                                          <Insets right="50.0" />
+                                       </padding>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </StackPane>
+                     </children></VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <ToolBar layoutY="849.0" prefHeight="50.0" prefWidth="1300.0">
+        <items>
+          <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addProduct" text="Save" />
+            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="23.0" mnemonicParsing="false" onAction="#abort" text="Cancel" />
+        </items>
+         <padding>
+            <Insets left="200.0" />
+         </padding>
+      </ToolBar>
+   </children>
+</AnchorPane>
