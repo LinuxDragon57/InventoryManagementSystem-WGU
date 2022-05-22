@@ -237,7 +237,7 @@
       <ToolBar layoutY="849.0" prefHeight="50.0" prefWidth="1300.0">
         <items>
           <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#modifyProduct" text="Save" />
-            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="23.0" mnemonicParsing="false" onAction="#abort" text="Cancel" />
+            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="23.0" mnemonicParsing="false" onAction="#resetScene" text="Cancel" />
         </items>
          <padding>
             <Insets left="200.0" />

@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import model.Inventory;
@@ -22,6 +21,12 @@ import model.Product;
 
 import static main.Main.*;
 
+/**
+ * @author Tyler Gautney
+ * The MainMenu class initializes the main menu view. In the main menu, users can view parts and products laid out in
+ * separated table views. Further, users may use the buttons to add, modify, or delete parts. The MainMenu also allows
+ * for searching for parts and products.
+ */
 public class MainMenu implements Initializable {
 
     public TextField searchPartField;
@@ -49,6 +54,13 @@ public class MainMenu implements Initializable {
     private static final Inventory inventory = new Inventory();
 
 
+    /**
+     * When the Add button is clicked underneath the Parts' table view; this method is called, and it initializes the
+     * addPart view.
+     * @see AddPart The scene gets passed off to the AddPart controller class.
+     * @param actionEvent the action event passed in by clicking the button. This is used to recycle the current scene.
+     * @throws IOException throw an IOException if javafx.fxml.FXMLLoader.load throws one.
+     */
     public void addPart(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addPart.fxml")));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -57,6 +69,13 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
+    /**
+     * When the Add button is clicked underneath the Products' table view; this method is called, and it initializes the
+     * addProduct view.
+     * @see AddProduct The scene gets passed off to the AddProduct controller class.
+     * @param actionEvent the action event passed in by clicking the button. This is used to recycle the current scene.
+     * @throws IOException throw an IOException if javafx.fxml.FXMLLoader.load throws one.
+     */
     public void addProduct(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addProduct.fxml")));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -65,7 +84,13 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
-    public void modifyPart() {
+    /**
+     * When the Modify button is clicked underneath the Parts' table view; this method is called, and it initializes the
+     * modifyProduct view with data from the selected Part.
+     * @see ModifyPart The scene and data get passed off to the ModifyPart controller class.
+     * @param actionEvent the action event passed in by clicking the button. This is used to recycle the current scene.
+     */
+    public void modifyPart(ActionEvent actionEvent) {
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
             int selectedPartIndex = inventory.getAllParts().indexOf(selectedPart);
@@ -76,7 +101,7 @@ public class MainMenu implements Initializable {
                 ModifyPart mp = loader.getController();
                 mp.setSelectedPart(selectedPartIndex, selectedPart);
 
-                Stage stage = new Stage();
+                Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
                 stage.setTitle("Modify Part");
                 stage.setScene(new Scene(root, 800, 925));
                 stage.show();
@@ -89,7 +114,13 @@ public class MainMenu implements Initializable {
 
     }
 
-    public void modifyProduct() {
+    /**
+     * When the Modify button is clicked underneath the Products' table view; this method is called; and it initializes
+     * the modifyProduct view with data from the selected Product - which uses the ModifyProduct controller class.
+     * @see ModifyProduct The scene and data get passed off to the ModifyProduct controller class.
+     * @param actionEvent the action event passed in by clicking the button. This is used to recycle the current scene.
+     */
+    public void modifyProduct(ActionEvent actionEvent) {
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
             int selectedProductIndex = inventory.getAllProducts().indexOf(selectedProduct);
@@ -100,7 +131,7 @@ public class MainMenu implements Initializable {
                 ModifyProduct mp = loader.getController();
                 mp.setSelectedProduct(selectedProductIndex, selectedProduct);
 
-                Stage stage = new Stage();
+                Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
                 stage.setTitle("Modify Product");
                 stage.setScene(new Scene(root, 1300, 925));
                 stage.show();
@@ -114,6 +145,12 @@ public class MainMenu implements Initializable {
     }
 
 
+    /**
+     * Gets a selected Part in the Parts' table view, and removes that Part from the allParts observable arrayList.
+     * If no part is selected, a dialog notifies the user and requests for them to make a selection using main.Main.showDialog.
+     * Otherwise, it confirms whether the user really wants to delete a part using main.Main.confirmationDialog before
+     * actually deleting the part.
+     */
     public void deletePart() {
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
 
@@ -133,6 +170,12 @@ public class MainMenu implements Initializable {
         }
     }
 
+    /**
+     * Gets a selected Product in the Products' table view, and removes that Product from the allProducts observable arrayList.
+     * If no product is selected, a dialog notifies the user and requests for them to make a selection using main.Main.showDialog.
+     * Otherwise, it confirms whether the user really wants to delete a product using main.Main.confirmationDialog before
+     * actually deleting the product.
+     */
     public void deleteProduct() {
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
@@ -151,48 +194,54 @@ public class MainMenu implements Initializable {
         }
     }
 
+    /**
+     * The searchPartField TextField takes in a String that represents either an integer, the partial name of a Part,
+     * or the whole name of a Part. This method first tries to convert the String to an integer and search for a part based on
+     * its partID number. If that fails; a NumberFormatException will be thrown, so it will simply search for the part
+     * based on its partial or entire name.
+     */
     public void searchPart() {
         String queryString = searchPartField.getText();
-        Integer partIDNumber = null;
 
         try { //Try to convert the search string into an Integer Object in case it is a part ID number.
-            partIDNumber = Integer.valueOf(queryString);
-        } catch (NumberFormatException exception) {
-            System.out.println("The Query String is not a number. Skipping conversion to an integer...");
-        }
-
-        if (partIDNumber != null) {
+            int partIDNumber = Integer.parseInt(queryString);
             Part selectedPart = inventory.lookupPart(partIDNumber);
             ObservableList<Part> selectedParts = FXCollections.observableArrayList();
             selectedParts.add(selectedPart);
             partsTable.setItems(selectedParts);
-        } else {
-            ObservableList<Part> selectedParts = inventory.lookupPart(queryString);
-            partsTable.setItems(selectedParts);
+        } catch (NumberFormatException exception) {
+                ObservableList<Part> selectedParts = inventory.lookupPart(queryString);
+                partsTable.setItems(selectedParts);
         }
     }
 
+    /**
+     * The searchProductField TextField takes in a String that represents either an integer, the partial name of a Product,
+     * or the whole name of a Product. This method first tries to convert the String to an integer and search for a product based
+     * on its productID number. If that fails; a NumberFormatException will be thrown, so it will simply search for the
+     * Product based on its partial or entire name.
+     */
     public void searchProduct() {
         String queryString = searchProductField.getText();
-        Integer productIDNumber = null;
 
         try { //Try to convert the search string into an Integer Object in case it is a part ID number.
-            productIDNumber = Integer.valueOf(queryString);
-        } catch (NumberFormatException exception) {
-            System.out.println("The Query String is not a number. Skipping conversion to an integer...");
-        }
-
-        if (productIDNumber != null) {
+            int productIDNumber = Integer.parseInt(queryString);
             Product selectedProduct = inventory.lookupProduct(productIDNumber);
             ObservableList<Product> selectedProducts = FXCollections.observableArrayList();
             selectedProducts.add(selectedProduct);
             productsTable.setItems(selectedProducts);
-        } else {
+        } catch (NumberFormatException exception) {
             ObservableList<Product> selectedProducts = inventory.lookupProduct(queryString);
             productsTable.setItems(selectedProducts);
         }
     }
 
+    /**
+     * Initializes this controller when the FXMLLoader's load method is called.
+     * @see javafx.fxml.Initializable
+     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html">
+     *     The initialize method overrides the one in the Initializable interface.</a>
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTable(inventory.getAllParts(), partsTable, partID, partName, partStock, partPrice);
