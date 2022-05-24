@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +30,7 @@ import static main.Main.*;
  */
 public class MainMenu implements Initializable {
 
+    public Button closeProgramBtn;
     public TextField searchPartField;
     public TextField searchProductField;
 
@@ -147,14 +149,24 @@ public class MainMenu implements Initializable {
 
     /**
      * Gets a selected Part in the Parts' table view, and removes that Part from the allParts observable arrayList.
+     * Then it checks all products in the inventory for an associated part matching this part. If it finds this part in
+     * any product's associated parts list, it flips the canDelete bit to 0 (which starts out as a 1), and breaks out of the loop.
      * If no part is selected, a dialog notifies the user and requests for them to make a selection using main.Main.showDialog.
      * Otherwise, it confirms whether the user really wants to delete a part using main.Main.confirmationDialog before
      * actually deleting the part.
      */
     public void deletePart() {
+        boolean canDelete = true;
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
 
-        if (selectedPart != null) {
+        for (Product product : inventory.getAllProducts()) {
+            if (product.getAllAssociatedParts().contains(selectedPart)) {
+                canDelete = false;
+                break;
+            }
+        }
+
+        if (selectedPart != null && canDelete) {
             boolean confirmDeletion = confirmationDialog("Delete Part?",
                     "Are you sure you really want to delete " + selectedPart.getName() + " part?");
             if (!confirmDeletion) {
@@ -165,6 +177,8 @@ public class MainMenu implements Initializable {
                 else
                     showDialog("Part Deletion Failed", "Part " + selectedPart.getName() + "couldn't be deleted.");
             }
+        } else if (!canDelete) {
+            showDialog("Cannot Delete Part", "The part is associated with one or more products.");
         } else {
             showDialog("No Part Selected", "Please select a part from the table to delete.");
         }
@@ -237,9 +251,19 @@ public class MainMenu implements Initializable {
     }
 
     /**
+     * Calls the Platform.exit() method call from the JavaFX library to close the app.
+     * @see <a href="https://openjfx.io/javadoc/18/javafx.graphics/javafx/application/Platform.html" target="_blank">
+     *     javafx.application.Platform</a>
+     */
+    public int closeProgram() {
+        Platform.exit();
+        return 0;
+    }
+
+    /**
      * Initializes this controller when the FXMLLoader's load method is called.
      * @see javafx.fxml.Initializable
-     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html">
+     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html" target="_blank">
      *     The initialize method overrides the one in the Initializable interface.</a>
      */
     @Override

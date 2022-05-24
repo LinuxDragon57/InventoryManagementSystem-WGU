@@ -43,9 +43,12 @@ public class AddPart extends ChangePartInventory implements Initializable {
             int max = Integer.parseInt(partMaxField.getText());
             int min = Integer.parseInt(partMinField.getText());
 
-            if (max <= min && (stock < min || stock > max)) {
+            if (max <= min) {
                 showDialog("Invalid Input",
                         "The min number should not be greater than or equal to the max number.");
+            } else if (stock > max || stock < min) {
+                showDialog("Invalid Input",
+                        "The stock should be a number between the minimum and the maximum.");
             } else {
                 Part newPart;
                 if (inHouseRadioBtn.isSelected()) {
@@ -65,7 +68,7 @@ public class AddPart extends ChangePartInventory implements Initializable {
 
     /** Initializes this controller when the FXMLLoader's load method is called.
      * @see javafx.fxml.Initializable
-     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html">
+     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html" target="_blank">
      *     The intialize method overrides the one in the Initializable interface.</a>
      */
     @Override

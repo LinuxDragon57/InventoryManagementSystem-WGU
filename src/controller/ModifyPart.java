@@ -77,10 +77,12 @@ public class ModifyPart extends ChangePartInventory implements Initializable {
             showDialog("Invalid Data", "Ensure you have only entered numbers where required.");
         }
 
-        if (selectedPart.getMin() >= selectedPart.getMax() &&
-                (selectedPart.getStock() > selectedPart.getMax() || selectedPart.getStock() < selectedPart.getMin())) {
+        if (selectedPart.getMin() >= selectedPart.getMax()) {
             showDialog("Invalid Input",
                     "The min number should not be greater than or equal to the max number.");
+        } else if (selectedPart.getStock() < selectedPart.getMin() || selectedPart.getStock() > selectedPart.getMax()) {
+            showDialog("Invalid Input",
+                    "The stock should be a number between the minimum and the maximum.");
         } else {
             inventory.updatePart(selectedPartIndex, selectedPart);
             resetScene(actionEvent);

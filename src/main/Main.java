@@ -17,7 +17,7 @@ import java.util.Optional;
 /** @author Tyler Gautney
  * This class is the application factory for the Inventory Management System JavaFX application.
  * The Application factory also houses several static methods for use application-wide.
- * @see <a href="https://openjfx.io/javadoc/18/">JavaFX Documentation</a>
+ * @see <a href="https://openjfx.io/javadoc/18/" target="_blank">JavaFX Documentation</a>
  */
 public class Main extends Application {
 
@@ -42,8 +42,10 @@ public class Main extends Application {
      * @param args launch the application with a variable number of method arguments.
      */
     public static void main(String[] args) {
-        //controller.AddProduct.populateTestProducts();
-        //controller.AddPart.populateTestParts();
+        /*
+         * controller.AddProduct.populateTestProducts();
+         * controller.AddPart.populateTestParts();
+         **/
         launch(args);
     }
 

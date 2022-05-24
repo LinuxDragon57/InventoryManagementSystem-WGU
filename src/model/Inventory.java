@@ -95,7 +95,7 @@ public class Inventory {
      * Getter for the allParts observable ArrayList.
      * @return the allParts observable ArrayList of Part objects.
      * @see javafx.collections.FXCollections
-     * <a href="https://openjfx.io/javadoc/18/javafx.base/javafx/collections/FXCollections.html">
+     * <a href="https://openjfx.io/javadoc/18/javafx.base/javafx/collections/FXCollections.html" target="_blank">
      *     JavaFX Observable Array List</a>
      */
     public ObservableList<Part> getAllParts() {return allParts;}
@@ -103,7 +103,7 @@ public class Inventory {
      * Getter for the allProducts observable ArrayList.
      * @return the allProducts observable ArrayList of Product objects.
      * @see javafx.collections.FXCollections
-     * <a href="https://openjfx.io/javadoc/18/javafx.base/javafx/collections/FXCollections.html">
+     * <a href="https://openjfx.io/javadoc/18/javafx.base/javafx/collections/FXCollections.html" target="_blank">
      *     JavaFX Observable Array List</a>
      */
     public ObservableList<Product> getAllProducts() {return allProducts;}

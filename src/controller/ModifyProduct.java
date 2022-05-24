@@ -62,10 +62,12 @@ public class ModifyProduct extends ChangeProductInventory implements Initializab
             showDialog("Invalid Data", "Ensure you have only entered numbers where required.");
         }
 
-        if (selectedProduct.getMin() >= selectedProduct.getMax() &&
-                (selectedProduct.getStock() > selectedProduct.getMax() || selectedProduct.getStock() < selectedProduct.getMin())) {
+        if (selectedProduct.getMin() >= selectedProduct.getMax()) {
             showDialog("Invalid Input",
-                    "The min number should not be greater than or equal to the max number, and max > stock > min.");
+                    "The min number should not be greater than or equal to the max number.");
+        } else if (selectedProduct.getStock() < selectedProduct.getMin() || selectedProduct.getStock() > selectedProduct.getMax()) {
+            showDialog("Invalid Input",
+                    "The stock should be a number between the minimum and the maximum.");
         } else {
             inventory.updateProduct(selectedProductIndex, selectedProduct);
             resetScene(actionEvent);

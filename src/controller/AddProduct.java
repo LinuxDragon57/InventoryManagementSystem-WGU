@@ -43,9 +43,12 @@ public class AddProduct extends ChangeProductInventory implements Initializable 
             int max = Integer.parseInt(productMaxField.getText());
             int min = Integer.parseInt(productMinField.getText());
 
-            if (max <= min && (stock < min || stock > max)) {
+            if (max <= min) {
                 showDialog("Invalid Input",
-                        "The min number should not be greater than or equal to the max number, and max > stock > min.");
+                        "The min number should not be greater than or equal to the max number.");
+            } else if (stock > max || stock < min) {
+                showDialog("Invalid Input",
+                        "The stock should be a number between the minimum and the maximum.");
             } else {
                 Product newProduct = new Product(getNextIDValue(), name, price, stock, min, max);
                 for (Part part : associatedPartsList) {
@@ -77,7 +80,7 @@ public class AddProduct extends ChangeProductInventory implements Initializable 
     /**
      * Initializes this controller when called by FXMLLoader's load method.
      * @see javafx.fxml.Initializable
-     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html">
+     * <a href="https://openjfx.io/javadoc/18/javafx.fxml/javafx/fxml/Initializable.html" target="_blank">
      *     The intialize method overrides the one in the Initializable interface.</a>
      */
     @Override
